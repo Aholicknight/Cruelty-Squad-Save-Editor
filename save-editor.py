@@ -19,7 +19,8 @@ def main():
     levels_unlocked = save_data["levels_unlocked"]
     weapons_unlocked = sum(save_data["weapons_unlocked"])
     money = save_data["money"]
-    
+
+    print("Cruelty Squad Save Editor")
     print("Current Levels Unlocked:", levels_unlocked)
     print("Number of Weapons Unlocked:", weapons_unlocked)
     print("Current Money:", money)

@@ -4,9 +4,20 @@ import json
 save_file_path = os.path.expandvars(r"%APPDATA%\Godot\app_userdata\Cruelty Squad\savegame.save")
 
 def load_save_file():
-    with open(save_file_path, "r") as file:
-        save_data = file.read()
-        return json.loads("{" + save_data.split("{", 1)[1])
+    try:
+        with open(save_file_path, "r") as file:
+            save_data = file.read()
+            return json.loads("{" + save_data.split("{", 1)[1])
+    except FileNotFoundError:
+        print(f"File {save_file_path} not found.")
+        new_path = input("Please enter the path to the savegame.save file: ")
+        try:
+            with open(new_path, "r") as file:
+                save_data = file.read()
+                return json.loads("{" + save_data.split("{", 1)[1])
+        except FileNotFoundError:
+            print(f"File {new_path} not found.")
+            return None
 
 def save_save_file(data):
     save_data = json.dumps(data, separators=(",", ":"))
@@ -15,6 +26,8 @@ def save_save_file(data):
 
 def main():
     save_data = load_save_file()
+    if save_data is None:
+        return
     
     levels_unlocked = save_data["levels_unlocked"]
     weapons_unlocked = sum(save_data["weapons_unlocked"])

@@ -32,7 +32,7 @@ jobs:
 
     - name: Create version file
       run: |
-        python -m pyinstaller_versionfile.create_versionfile \
+        pyinstaller-versionfile \
           --version="" \
           --company-name="" \
           --file-description="A save editor for the game Cruelty Squad" \

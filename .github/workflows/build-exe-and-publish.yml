@@ -40,6 +40,7 @@ jobs:
           --original-filename="Cruelty Squad Save Editor.exe" \
           --product-name="Cruelty Squad Save Editor" \
           --output-file="version_info.txt"
+      shell: bash
 
     - name: Build exe
       run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file=version_info.txt save-editor.py

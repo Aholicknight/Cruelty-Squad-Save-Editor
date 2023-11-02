@@ -28,9 +28,24 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller
         pip install Pillow
+        pip install pyinstaller_versionfile
+
+    - name: Create version file
+      run: >
+          python -c "
+          import pyinstaller_versionfile
+          version = pyinstaller_versionfile.create_versionfile(
+              output_file='version_info.txt',
+              version='${{ github.event.inputs.tag }}',
+              company_name='',
+              file_description='A save editor for the game Cruelty Squad',
+              internal_name='Cruelty Squad Save Editor',
+              original_filename='Cruelty Squad Save Editor.exe',
+              product_name='Cruelty Squad Save Editor'
+          )"
 
     - name: Build exe
-      run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" save-editor.py
+      run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file=version_info.txt save-editor.py
 
     - name: Release
       uses: softprops/action-gh-release@v1

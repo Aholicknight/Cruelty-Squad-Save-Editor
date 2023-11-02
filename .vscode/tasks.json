@@ -4,8 +4,8 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build EXE with py2exe",
-            "command": "python setup.py py2exe",
+            "label": "Build EXE with pyinstaller",
+            "command": "python setup.py",
             "type": "shell",
             "group": {
                 "kind": "build",

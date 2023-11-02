@@ -27,6 +27,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
+        pip install Pillow
 
     - name: Build exe
       run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" save-editor.py

@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 
 setup.py
+version_info.txt

@@ -21,29 +21,16 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.9'
+        python-version: '3.x'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
         pip install Pillow
-        pip install pyinstaller-versionfile
-
-    - name: Create version file
-      run: |
-        pyinstaller-versionfile \
-          --version="" \
-          --company-name="" \
-          --file-description="A save editor for the game Cruelty Squad" \
-          --internal-name="Cruelty Squad Save Editor" \
-          --original-filename="Cruelty Squad Save Editor.exe" \
-          --product-name="Cruelty Squad Save Editor" \
-          --output-file="version_info.txt"
-      shell: bash
 
     - name: Build exe
-      run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file=version_info.txt save-editor.py
+      run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" save-editor.py
 
     - name: Release
       uses: softprops/action-gh-release@v1

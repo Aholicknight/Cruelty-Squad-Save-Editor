@@ -1,14 +1,14 @@
 name: Build and Release
 
 on: 
-    workflow_dispatch:
-      inputs:
-        tag:
-          description: 'Tag to use for this release'
-          required: true
-        description:
-          description: 'Description for this release'
-          required: false
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to use for this release'
+        required: true
+      description:
+        description: 'Description for this release'
+        required: false
 
 jobs:
   build:
@@ -32,24 +32,12 @@ jobs:
     - name: Build exe
       run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" save-editor.py
 
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Release
+      uses: softprops/action-gh-release@v1
       with:
+        files: ./dist/Cruelty Squad Save Editor.exe
         tag_name: ${{ github.event.inputs.tag }}
-        release_name: Cruelty Squad Save Editor v${{ github.event.inputs.tag }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
+        name: Cruelty Squad Save Editor v${{ github.event.inputs.tag }}
+        body: ${{ github.event.inputs.description }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./dist/Cruelty Squad Save Editor.exe
-        asset_name: Cruelty Squad Save Editor.exe
-        asset_content_type: application/octet-stream

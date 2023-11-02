@@ -1,11 +1,14 @@
 name: Build and Release
 
 on: 
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Tag to use for this release'
-        required: true
+    workflow_dispatch:
+      inputs:
+        tag:
+          description: 'Tag to use for this release'
+          required: true
+        description:
+          description: 'Description for this release'
+          required: false
 
 jobs:
   build:

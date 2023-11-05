@@ -1,5 +1,9 @@
 import os
 import json
+import colorama
+from colorama import Fore, Back, Style
+
+colorama.init()
 
 save_file_path = os.path.expandvars(r"%APPDATA%\Godot\app_userdata\Cruelty Squad\savegame.save") # Default save file path
 
@@ -10,7 +14,7 @@ def load_save_file():
             save_data = file.read()
             return json.loads("{" + save_data.split("{", 1)[1])
     except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
-        print(f"File {save_file_path} not found.")
+        print(Fore.RED + f"File {save_file_path} not found." + Style.RESET_ALL)
         new_path = input("Please enter the path to the savegame.save file: ")
         try:
             with open(new_path, "r") as file:
@@ -18,7 +22,7 @@ def load_save_file():
                 save_file_path = new_path  # Update the save file path
                 return json.loads("{" + save_data.split("{", 1)[1])
         except FileNotFoundError:
-            print(f"File {new_path} not found.")
+            print(Fore.RED + f"File {save_file_path} not found." + Style.RESET_ALL)
             return None
 
 def save_save_file(data):
@@ -44,10 +48,10 @@ def print_status(save_data):
             break
 
     print("Cruelty Squad Save Editor")
-    print("Current Levels Unlocked:", levels_unlocked)
-    print("Number of Weapons Unlocked:", weapons_unlocked)
-    print("Current Money:", money)
-    print("Current Difficulty:", current_difficulty)
+    print("Current Levels Unlocked:", Fore.RED + str(levels_unlocked) + Style.RESET_ALL)
+    print("Number of Weapons Unlocked:", Fore.RED + str(weapons_unlocked) + Style.RESET_ALL)
+    print("Current Money:", Fore.GREEN + str(money) + Style.RESET_ALL)
+    print("Current Difficulty:", Fore.RED + str(current_difficulty) + Style.RESET_ALL)
 
 def clear_console():
     command = 'cls' if os.name == 'nt' else 'clear'

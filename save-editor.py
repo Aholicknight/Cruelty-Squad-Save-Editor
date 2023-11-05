@@ -42,6 +42,8 @@ def print_status(save_data):
         "hope": "Hope Eradicated"
     }
 
+    current_difficulty = "Unknown"  # If no difficulty is found, set it to unknown (should never happen)
+
     for key, value in difficulty_mapping.items():
         if save_data.get(key):
             current_difficulty = value

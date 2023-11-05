@@ -120,12 +120,17 @@ def main():
         
         elif choice == "4":
             print("\nDifficulties:")
-            print("1) Divine Light (default)")
-            print("2) Flesh Automation (second easiest difficulty)")
-            print("3) Power In Misery (easiest difficulty)")
-            print("4) Hope Eradicated (secret hardest difficulty)")
+            print("1) Divine Light " + Fore.GREEN + "(default)" + Style.RESET_ALL)
+            print("2) Flesh Automation " + Fore.YELLOW + "(second easiest difficulty)" + Style.RESET_ALL)
+            print("3) Power In Misery " + Fore.GREEN + "(easiest difficulty)" + Style.RESET_ALL)
+            print("4) Hope Eradicated " + Fore.RED + "(secret hardest difficulty)" + Style.RESET_ALL)
+            print("5) Go back")
 
             difficulty_choice = input("Enter your choice: ")
+
+            if difficulty_choice == "5":
+                clear_console()
+                print_status(save_data)
 
             difficulties = ["soul", "hell_discovered", "husk", "hope"]
 

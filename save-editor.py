@@ -1,7 +1,7 @@
 import os
 import json
 
-save_file_path = os.path.expandvars(r"%APPDATA%\Godot\app_userdata\Cruelty Squad\savegame.save")
+save_file_path = os.path.expandvars(r"%APPDATA%\Godot\app_userdata\Cruelty Squad\savegame.save") # Default save file path
 
 def load_save_file():
     global save_file_path
@@ -9,7 +9,7 @@ def load_save_file():
         with open(save_file_path, "r") as file:
             save_data = file.read()
             return json.loads("{" + save_data.split("{", 1)[1])
-    except FileNotFoundError:
+    except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
         print(f"File {save_file_path} not found.")
         new_path = input("Please enter the path to the savegame.save file: ")
         try:

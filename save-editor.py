@@ -82,7 +82,7 @@ def main():
         print("\nOptions:")
         print("1) Edit levels unlocked")
         print("2) Unlock all weapons")
-        print("3) Edit money")
+        print("3) Edit Money")
         print("4) Edit Difficulty")
         print("5) Exit")
         

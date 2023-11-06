@@ -126,13 +126,9 @@ def main():
             print("2) Flesh Automation " + Fore.YELLOW + "(second easiest difficulty)" + Style.RESET_ALL)
             print("3) Power In Misery " + Fore.GREEN + "(easiest difficulty)" + Style.RESET_ALL)
             print("4) Hope Eradicated " + Fore.RED + "(secret hardest difficulty)" + Style.RESET_ALL)
-            print("5) Go back")
+            print("5) Go back to main menu")
 
             difficulty_choice = input("Enter your choice: ")
-
-            if difficulty_choice == "5":
-                clear_console()
-                print_status(save_data)
 
             difficulties = ["soul", "hell_discovered", "husk", "hope"]
 
@@ -146,7 +142,8 @@ def main():
                 clear_console()
                 print_status(save_data)
             else:
-                print("Invalid input.")
+                clear_console()
+                print_status(save_data)
         
         elif choice == "5":
             break

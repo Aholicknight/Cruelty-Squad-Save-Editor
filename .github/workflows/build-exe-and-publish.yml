@@ -33,15 +33,13 @@ jobs:
 
     - name: Create version file
       run: |
-        python -m pyinstaller_versionfile.create_versionfile \
-          --version="" \
-          --company-name="Aholicknight" \
-          --file-description="A save editor for the game Cruelty Squad" \
-          --internal-name="Cruelty Squad Save Editor" \
-          --original-filename="Cruelty Squad Save Editor.exe" \
-          --product-name="Cruelty Squad Save Editor" \
-          --output-file="version_info.txt"
-      shell: bash
+        echo "FileVersion=" > version_info.txt
+        echo "ProductVersion=" >> version_info.txt
+        echo "FileDescription=A save editor for the game Cruelty Squad" >> version_info.txt
+        echo "CompanyName=Aholicknight" >> version_info.txt
+        echo "OriginalFilename=Cruelty Squad Save Editor.exe" >> version_info.txt
+        echo "ProductName=Cruelty Squad Save Editor" >> version_info.txt
+        echo "InternalName=Cruelty Squad Save Editor" >> version_info.txt
 
     - name: Build exe
       run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file=version_info.txt save-editor.py

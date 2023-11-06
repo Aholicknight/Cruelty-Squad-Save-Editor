@@ -49,7 +49,7 @@ jobs:
       shell: bash
 
     - name: Build exe
-      run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file={version_file_path} save-editor.py
+      run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file=version_info.txt save-editor.py
 
     - name: Release
       uses: softprops/action-gh-release@v1

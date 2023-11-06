@@ -12,3 +12,7 @@ This Python program edits the Cruelty Squad save file located in `%APPDATA%\Godo
 ## Download
 
 To download the most recent version, goto the [release](https://github.com/Aholicknight/Cruelty-Squad-Save-Editor/releases/) tab.
+
+## Suggestions
+
+If there is something missing from the Cruelty Squad Save Editor and you would like it in the program, goto the [suggestion discussion](https://github.com/Aholicknight/Cruelty-Squad-Save-Editor/discussions/categories/suggestions) board and add a new discussion!

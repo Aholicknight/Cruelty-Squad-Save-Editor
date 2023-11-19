@@ -48,12 +48,16 @@ def print_status(save_data):
         if save_data.get(key):
             current_difficulty = value
             break
+    
+    life_death_symbol = "LIFE" if not save_data.get("death") else "DEATH"
 
     print("Cruelty Squad Save Editor")
     print("Current Levels Unlocked:", Fore.RED + str(levels_unlocked) + Style.RESET_ALL)
     print("Number of Weapons Unlocked:", Fore.RED + str(weapons_unlocked) + Style.RESET_ALL)
     print("Current Money:", Fore.GREEN + str(money) + Style.RESET_ALL)
     print("Current Difficulty:", Fore.RED + str(current_difficulty) + Style.RESET_ALL)
+    symbol_color = Fore.GREEN if life_death_symbol == "LIFE" else Fore.RED
+    print("Current Life/Death Symbol:", symbol_color + str(life_death_symbol) + Style.RESET_ALL)
 
 def clear_console():
     command = 'cls' if os.name == 'nt' else 'clear'
@@ -90,7 +94,8 @@ def main():
         print("2) Unlock all weapons")
         print("3) Edit Money")
         print("4) Edit Difficulty")
-        print("5) Exit")
+        print("5) Change Life/Death Symbol")
+        print("6) Exit")
         
         choice = input("Enter your choice: ")
         
@@ -144,8 +149,26 @@ def main():
             else:
                 clear_console()
                 print_status(save_data)
-        
+
         elif choice == "5":
+            print("\nLife/Death Symbols:")
+            print("1) LIFE " + Fore.GREEN + "(default)" + Style.RESET_ALL)
+            print("2) DEATH " + Fore.RED + "(secret)" + Style.RESET_ALL)
+            print("3) Go back to main menu")
+
+            symbol_choice = input("Enter your choice: ")
+
+            if 1 <= int(symbol_choice) <= 2:
+                save_data["death"] = True if int(symbol_choice) == 2 else False
+                save_save_file(save_data)
+                print("Life/Death Symbol updated.")
+                clear_console()
+                print_status(save_data)
+            else:
+                clear_console()
+                print_status(save_data)
+        
+        elif choice == "6":
             break
         
         else:

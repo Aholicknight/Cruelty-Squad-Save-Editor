@@ -50,13 +50,13 @@ def print_status(save_data):
             break
     
     life_death_symbol = "LIFE" if not save_data.get("death") else "DEATH"
+    symbol_color = Fore.GREEN if life_death_symbol == "LIFE" else Fore.RED
 
     print("Cruelty Squad Save Editor")
     print("Current Levels Unlocked:", Fore.RED + str(levels_unlocked) + Style.RESET_ALL)
     print("Number of Weapons Unlocked:", Fore.RED + str(weapons_unlocked) + Style.RESET_ALL)
     print("Current Money:", Fore.GREEN + str(money) + Style.RESET_ALL)
     print("Current Difficulty:", Fore.RED + str(current_difficulty) + Style.RESET_ALL)
-    symbol_color = Fore.GREEN if life_death_symbol == "LIFE" else Fore.RED
     print("Current Life/Death Symbol:", symbol_color + str(life_death_symbol) + Style.RESET_ALL)
 
 def clear_console():

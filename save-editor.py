@@ -1,4 +1,5 @@
 import os
+import datetime
 import json
 import colorama
 from colorama import Fore, Back, Style
@@ -95,7 +96,8 @@ def main():
         print("3) Edit Money")
         print("4) Edit Difficulty")
         print("5) Change Life/Death Symbol")
-        print("6) Exit")
+        print("6) Load/Backup Current Save File")
+        print("7) Exit")
         
         choice = input("Enter your choice: ")
         
@@ -169,6 +171,33 @@ def main():
                 print_status(save_data)
         
         elif choice == "6":
+            backup_file_path = save_file_path.replace('.save', '.bak')
+
+            if os.path.exists(backup_file_path):
+                creation_time = os.path.getctime(backup_file_path)
+                creation_date = datetime.datetime.fromtimestamp(creation_time).strftime("%Y-%m-%d %I:%M:%S %p")
+                print(Fore.YELLOW + f"Backup file created on {creation_date}" + Style.RESET_ALL)
+
+            print("\nSave File Operations:")
+            print(Fore.GREEN + "1) Backup current save file" + Style.RESET_ALL)
+            print(Fore.RED + "2) Load from backup" + Style.RESET_ALL)
+            print("3) Go back to main menu")
+
+            operation_choice = input("Enter your choice: ")
+
+            if operation_choice == "1":
+                with open(save_file_path, 'r') as original: data = original.read()
+                with open(backup_file_path, 'w') as backup: backup.write(data)
+                print("Backup created.")
+            elif operation_choice == "2":
+                with open(backup_file_path, 'r') as backup: data = backup.read()
+                with open(save_file_path, 'w') as original: original.write(data)
+                print("Backup loaded.")
+            else:
+                clear_console()
+                print_status(save_data)
+
+        elif choice == "7":
             break
         
         else:

@@ -1,5 +1,6 @@
 import os
 import datetime
+import time
 import json
 import colorama
 from colorama import Fore, Back, Style
@@ -7,6 +8,7 @@ from colorama import Fore, Back, Style
 colorama.init()
 
 save_file_path = os.path.expandvars(r"%APPDATA%\Godot\app_userdata\Cruelty Squad\savegame.save") # Default save file path
+stocks_file_path = os.path.expandvars(r"%APPDATA%\Godot\app_userdata\Cruelty Squad\stocks.save") # Default stocks file path
 
 def load_save_file():
     global save_file_path
@@ -97,7 +99,8 @@ def main():
         print("4) Edit Difficulty")
         print("5) Change Life/Death Symbol")
         print("6) Load/Backup Current Save File")
-        print("7) Exit")
+        print("7) Unlock all implants")
+        print("8) Exit")
         
         choice = input("Enter your choice: ")
         
@@ -192,12 +195,40 @@ def main():
             elif operation_choice == "2":
                 with open(backup_file_path, 'r') as backup: data = backup.read()
                 with open(save_file_path, 'w') as original: original.write(data)
-                print("Backup loaded.")
+                print("Backup loaded. Going back to main menu...")
+                # wait 2 seconds before going back to main menu to print stats
+                time.sleep(2)
+                clear_console()
+                print_status(save_data)
             else:
                 clear_console()
                 print_status(save_data)
-
         elif choice == "7":
+            all_implants = [
+                "Nightmare Vision Goggles", "First Aid Kit", "Zoom N Go Bionic Eyes", 
+                "Zomy X-200 Portable Cassette Player", "Vertical Entry Device", 
+                "CSIJ Level IV Body Armor", "CSIJ Level III Body Armor", 
+                "Speed Enhancer Gland", "CSIJ Level II Body Armor", "Life Sensor", 
+                "Grappendix", "Speed Enhancer Total Organ Package", "Biothruster", 
+                "Load Bearing Vest", "Tactical Blast Shield", "Composite Helmet", 
+                "Icaros Machine", "Flechette Grenade", "Night Vision Goggles", 
+                "Stealth Suit", "Cursed Torch", "HE Grenade", "Cortical Scaledown+", 
+                "Hazmat Suit", "Tattered Rain Hat", "Holy Scope", "Abominator", 
+                "Eyes of Corporate Insight", "Military Camouflage", "Extravagant Suit", 
+                "ZZzzz Special Sedative Grenade", "Augmented arms", "Pneumatic Legs", 
+                "Alien Leg Wetware", "Ammunition Gland", "Angular Advantage Tactical Munitions", 
+                "Skullgun", "House", "CSIJ Level VI Golem Exosystem", "Goo Overdrive", 
+                "Gunkboosters", "CSIJ Level V Biosuit", "CSIJ Level IIB Body Armor", 
+                "Funkgrunters", "Microbial Oil Secretion Glands", "Biojet", 
+                "Speed Enhancer Node Cluster", "Bouncy Suit", "Flowerchute"
+            ]
+
+            save_data["implants_unlocked"] = all_implants
+            save_save_file(save_data)
+            print("All implants unlocked.")
+            clear_console()
+            print_status(save_data)
+        elif choice == "8":
             break
         
         else:

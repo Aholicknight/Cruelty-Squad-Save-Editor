@@ -6,8 +6,11 @@ This Python program edits the Cruelty Squad save file located in `%APPDATA%\Godo
 
 * Level unlock
 * Unlock all weapons at once
+* Unlock all implants at once
 * Edit money
-* Change difficulty (Divine Light, Flesh Automation, Power In Misery, Hope Eradicated)
+* Edit difficulty (Divine Light, Flesh Automation, Power In Misery, Hope Eradicated)
+* Change LIFE/DEATH Symbol
+* Load/Backup your save file
 
 ## Download
 

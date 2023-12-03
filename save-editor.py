@@ -189,6 +189,8 @@ def main():
             operation_choice = input("Enter your choice: ")
 
             if operation_choice == "1":
+                if os.path.exists(backup_file_path): # delete existing backup file if it exists
+                    os.remove(backup_file_path)
                 with open(save_file_path, 'r') as original: data = original.read()
                 with open(backup_file_path, 'w') as backup: backup.write(data)
                 print("Backup created.")

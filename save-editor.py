@@ -37,6 +37,7 @@ def print_status(save_data):
     levels_unlocked = save_data["levels_unlocked"]
     weapons_unlocked = sum(save_data["weapons_unlocked"])
     money = save_data["money"]
+    implants_unlocked = save_data["implants_unlocked"]
 
     difficulty_mapping = {
         "soul": "Divine Light",
@@ -59,6 +60,7 @@ def print_status(save_data):
     print("Current Levels Unlocked:", Fore.RED + str(levels_unlocked) + Style.RESET_ALL)
     print("Number of Weapons Unlocked:", Fore.RED + str(weapons_unlocked) + Style.RESET_ALL)
     print("Current Money:", Fore.GREEN + str(money) + Style.RESET_ALL)
+    print("Current Implants Unlocked:", Fore.RED + str(len(implants_unlocked)) + Style.RESET_ALL)
     print("Current Difficulty:", Fore.RED + str(current_difficulty) + Style.RESET_ALL)
     print("Current Life/Death Symbol:", symbol_color + str(life_death_symbol) + Style.RESET_ALL)
 
@@ -99,7 +101,8 @@ def main():
         print("4) Edit Difficulty")
         print("5) Change Life/Death Symbol")
         print("6) Load/Backup Current Save File")
-        print("7) Unlock all implants")
+        print("7) " + Fore.GREEN + "Unlock" + Style.RESET_ALL + " all implants")
+        print("8) " + Fore.RED + "Lock" + Style.RESET_ALL + " all implants")
         print("8) Exit")
         
         choice = input("Enter your choice: ")
@@ -226,11 +229,39 @@ def main():
             ]
 
             save_data["implants_unlocked"] = all_implants
-            save_save_file(save_data)
-            print("All implants unlocked.")
-            clear_console()
-            print_status(save_data)
+            print("Are you sure you want to unlock all implants? (" + Fore.GREEN + "y" + Style.RESET_ALL + "/" + Fore.RED + "n" + Style.RESET_ALL + ")")
+            choice = input("Enter your choice: ")
+            if choice.lower() == "y":
+                save_save_file(save_data)
+                print(Fore.GREEN + "All implants unlocked." + Style.RESET_ALL)
+                time.sleep(2)
+                clear_console()
+                print_status(save_data)
+            else:
+                print(Fore.RED + "No changes made." + Style.RESET_ALL)
+                print("Going back to main menu...")
+                time.sleep(2)
+                clear_console()
+                print_status(save_data)
+
         elif choice == "8":
+            save_data["implants_unlocked"] = []
+            print("Are you sure you want to lock all implants? (" + Fore.GREEN + "y" + Style.RESET_ALL + "/" + Fore.RED + "n" + Style.RESET_ALL + ")")
+            choice = input("Enter your choice: ")
+            if choice.lower() == "y":
+                save_save_file(save_data)
+                print(Fore.GREEN + "All implants locked." + Style.RESET_ALL)
+                time.sleep(2)
+                clear_console()
+                print_status(save_data)
+            else:
+                print(Fore.RED + "No changes made." + Style.RESET_ALL)
+                print("Going back to main menu...")
+                time.sleep(2)
+                clear_console()
+                print_status(save_data)
+            
+        elif choice == "9":
             break
         
         else:

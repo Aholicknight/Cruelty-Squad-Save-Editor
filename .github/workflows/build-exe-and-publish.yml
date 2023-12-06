@@ -39,7 +39,7 @@ jobs:
         version_file_path = 'version_info.txt'
         version = pyinstaller_versionfile.create_versionfile(
             output_file=version_file_path,
-            version='',
+            version='${{ github.event.inputs.tag }}',
             company_name='Aholicknight',
             file_description='A save editor for the game Cruelty Squad',
             internal_name='Cruelty Squad Save Editor',

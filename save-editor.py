@@ -103,7 +103,7 @@ def main():
         print("6) Load/Backup Current Save File")
         print("7) " + Fore.GREEN + "Unlock" + Style.RESET_ALL + " all implants")
         print("8) " + Fore.RED + "Lock" + Style.RESET_ALL + " all implants")
-        print("8) Exit")
+        print("9) Exit")
         
         choice = input("Enter your choice: ")
         

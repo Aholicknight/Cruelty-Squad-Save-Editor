@@ -201,8 +201,7 @@ def main():
                 with open(backup_file_path, 'r') as backup: data = backup.read()
                 with open(save_file_path, 'w') as original: original.write(data)
                 print("Backup loaded. Going back to main menu...")
-                # wait 2 seconds before going back to main menu to print stats
-                time.sleep(2)
+                time.sleep(2) # wait 2 seconds before going back to main menu to print stats
                 clear_console()
                 print_status(save_data)
             else:

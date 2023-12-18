@@ -28,6 +28,24 @@ def load_save_file():
             print(Fore.RED + f"File {save_file_path} not found." + Style.RESET_ALL)
             return None
 
+def load_stocks_file():
+    global stocks_file_path
+    try:
+        with open(stocks_file_path, "r") as file:
+            stocks_data = file.read()
+            return json.loads("{" + stocks_data.split("{", 1)[1])
+    except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
+        print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
+        new_path = input("Please enter the path to the stocks.save file: ")
+        try:
+            with open(new_path, "r") as file:
+                stocks_data = file.read()
+                stocks_file_path = new_path  # Update the save file path
+                return json.loads("{" + stocks_data.split("{", 1)[1])
+        except FileNotFoundError:
+            print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
+            return None
+
 def save_save_file(data):
     save_data = json.dumps(data, separators=(",", ":"))
     with open(save_file_path, "w") as file:
@@ -56,7 +74,7 @@ def print_status(save_data):
     life_death_symbol = "LIFE" if not save_data.get("death") else "DEATH"
     symbol_color = Fore.GREEN if life_death_symbol == "LIFE" else Fore.RED
 
-    print("Cruelty Squad Save Editor")
+    print("Cruelty Squad Save Editor created by Aholicknight")
     print("Current Levels Unlocked:", Fore.RED + str(levels_unlocked) + Style.RESET_ALL)
     print("Number of Weapons Unlocked:", Fore.RED + str(weapons_unlocked) + Style.RESET_ALL)
     print("Current Money:", Fore.GREEN + str(money) + Style.RESET_ALL)

@@ -51,6 +51,11 @@ def save_save_file(data):
     with open(save_file_path, "w") as file:
         file.write('{"' + save_data.split('{"', 1)[1])
 
+def save_stocks_file(data):
+    stocks_data = json.dumps(data, separators=(",", ":"))
+    with open(stocks_file_path, "w") as file:
+        file.write('{"' + stocks_data.split('{"', 1)[1])
+
 def print_status(save_data):
     levels_unlocked = save_data["levels_unlocked"]
     weapons_unlocked = sum(save_data["weapons_unlocked"])

@@ -107,7 +107,7 @@ def main():
         
         choice = input("Enter your choice: ")
         
-        if choice == "1":
+        if choice == "1": # unlock all levels
             new_levels_unlocked = int(input("Enter new levels unlocked (1-19): "))
             if 1 <= new_levels_unlocked <= 19:
                 save_data["levels_unlocked"] = new_levels_unlocked
@@ -118,14 +118,14 @@ def main():
             else:
                 print("Invalid input.")
         
-        elif choice == "2":
+        elif choice == "2": # unlock all weapons
             save_data["weapons_unlocked"] = [True] * len(save_data["weapons_unlocked"])
             save_save_file(save_data)
             print("All weapons unlocked.")
             clear_console()
             print_status(save_data)
         
-        elif choice == "3":
+        elif choice == "3": # edit money
             new_money = int(input("Enter new money amount: "))
             save_data["money"] = new_money
             save_save_file(save_data)
@@ -133,7 +133,7 @@ def main():
             clear_console()
             print_status(save_data)
         
-        elif choice == "4":
+        elif choice == "4": # edit difficulty
             print("\nDifficulties:")
             print("1) Divine Light " + Fore.GREEN + "(default)" + Style.RESET_ALL)
             print("2) Flesh Automation " + Fore.YELLOW + "(second easiest difficulty)" + Style.RESET_ALL)
@@ -158,7 +158,7 @@ def main():
                 clear_console()
                 print_status(save_data)
 
-        elif choice == "5":
+        elif choice == "5": # change life/death symbol
             print("\nLife/Death Symbols:")
             print("1) LIFE " + Fore.GREEN + "(default)" + Style.RESET_ALL)
             print("2) DEATH " + Fore.RED + "(secret)" + Style.RESET_ALL)
@@ -176,7 +176,7 @@ def main():
                 clear_console()
                 print_status(save_data)
         
-        elif choice == "6":
+        elif choice == "6": # create and load save file backup
             backup_file_path = save_file_path.replace('.save', '.bak')
 
             if os.path.exists(backup_file_path):
@@ -207,7 +207,8 @@ def main():
             else:
                 clear_console()
                 print_status(save_data)
-        elif choice == "7":
+
+        elif choice == "7": # unlock all implants
             all_implants = [
                 "Nightmare Vision Goggles", "First Aid Kit", "Zoom N Go Bionic Eyes", 
                 "Zomy X-200 Portable Cassette Player", "Vertical Entry Device", 
@@ -243,7 +244,7 @@ def main():
                 clear_console()
                 print_status(save_data)
 
-        elif choice == "8":
+        elif choice == "8": # reset/lock all implants
             save_data["implants_unlocked"] = []
             print("Are you sure you want to lock all implants? (" + Fore.GREEN + "y" + Style.RESET_ALL + "/" + Fore.RED + "n" + Style.RESET_ALL + ")")
             choice = input("Enter your choice: ")
@@ -260,10 +261,10 @@ def main():
                 clear_console()
                 print_status(save_data)
             
-        elif choice == "9":
+        elif choice == "9": # exit
             break
         
-        else:
+        else: # if a number is invalid exit the save editor
             print("Invalid choice. Please enter a valid option.")
     
     save_save_file(save_data)

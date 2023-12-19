@@ -126,7 +126,8 @@ def main():
         print("6) Load/Backup Current Save File")
         print("7) " + Fore.GREEN + "Unlock" + Style.RESET_ALL + " all implants")
         print("8) " + Fore.RED + "Lock" + Style.RESET_ALL + " all implants")
-        print("9) Exit")
+        print("9) Edit Stocks")
+        print("10) Exit")
         
         choice = input("Enter your choice: ")
         
@@ -283,8 +284,52 @@ def main():
                 time.sleep(2)
                 clear_console()
                 print_status(save_data)
-            
-        elif choice == "9": # exit
+
+        elif choice == "9": # edit stocks
+            stocks_data = load_stocks_file()
+            print(Fore.GREEN + f"File {stocks_file_path} loaded." + Style.RESET_ALL)
+            print(f"Last modified: {datetime.datetime.fromtimestamp(os.path.getmtime(stocks_file_path)).strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"Last accessed: {datetime.datetime.fromtimestamp(os.path.getatime(stocks_file_path)).strftime('%Y-%m-%d %H:%M:%S')}")
+            # print(f"Data: {stocks_data}")
+            # Print the stock tickers
+            tickers = [ticker for ticker in stocks_data.keys() if ticker not in ['fish_found', 'org_found']]
+            tickers_str = ", ".join(tickers)
+            print(f"Tickers: {tickers_str}")
+            stocks_data = load_stocks_file()
+            if stocks_data is None:
+                return
+            while True:
+                print("What do you want to do?")
+                print("1. Edit stock")
+                print("2. Remove stocks")
+                print("3. Go back to main menu")
+                choice = input("Enter your choice: ")
+                if choice == "1":
+                    stock_name = input("Enter the stock name (Ticker): ")
+                    if stock_name in stocks_data:
+                        owned_stocks = input("Enter the number of owned stocks: ")
+                        stocks_data[stock_name]['owned'] = int(owned_stocks)
+                        save_stocks_file(stocks_data)
+                        print(Fore.GREEN + f"Stock {stock_name} updated." + Style.RESET_ALL)
+                    else:
+                        print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
+                elif choice == "2":
+                    stock_name = input("Enter the stock name (Ticker): ")
+                    if stock_name in stocks_data:
+                        stocks_data[stock_name]['owned'] = 0
+                        save_stocks_file(stocks_data)
+                        print(Fore.GREEN + f"Stock {stock_name} removed." + Style.RESET_ALL)
+                    else:
+                        print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
+                elif choice == "3":
+                    clear_console()
+                    print_status(save_data)
+                    break # go back to main menu
+                else:
+                    print(Fore.RED + "Invalid choice." + Style.RESET_ALL)
+                time.sleep(1)
+
+        elif choice == "10": # exit
             break
         
         else: # if a number is invalid exit the save editor

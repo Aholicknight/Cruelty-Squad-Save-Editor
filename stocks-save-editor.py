@@ -42,8 +42,9 @@ def print_status():
     print(f"Last accessed: {datetime.datetime.fromtimestamp(os.path.getatime(stocks_file_path)).strftime('%Y-%m-%d %H:%M:%S')}")
     # print(f"Data: {stocks_data}")
     # Print the stock tickers
-    tickers = ", ".join(stocks_data.keys())
-    print(f"Tickers: {tickers}")
+    tickers = [ticker for ticker in stocks_data.keys() if ticker not in ['fish_found', 'org_found']]
+    tickers_str = ", ".join(tickers)
+    print(f"Tickers: {tickers_str}")
 
 def main():
     print_status()
@@ -53,7 +54,7 @@ def main():
     while True:
         print("What do you want to do?")
         print("1. Edit stock")
-        print("2. Remove stock")
+        print("2. Remove stocks")
         print("3. Exit")
         choice = input("Enter your choice: ")
         if choice == "1":
@@ -66,9 +67,9 @@ def main():
             else:
                 print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
         elif choice == "2":
-            stock_name = input("Enter the stock name: ")
+            stock_name = input("Enter the stock name (Ticker): ")
             if stock_name in stocks_data:
-                del stocks_data[stock_name]
+                stocks_data[stock_name]['owned'] = 0
                 save_stocks_file(stocks_data)
                 print(Fore.GREEN + f"Stock {stock_name} removed." + Style.RESET_ALL)
             else:

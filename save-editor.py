@@ -32,16 +32,20 @@ def load_stocks_file():
     global stocks_file_path
     try:
         with open(stocks_file_path, "r") as file:
-            stocks_data = file.read()
-            return json.loads("{" + stocks_data.split("{", 1)[1])
+            stocks_data = json.load(file)
+            # Remove spaces from keys
+            stocks_data = {key.strip(): value for key, value in stocks_data.items()}
+            return stocks_data
     except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
         print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
         new_path = input("Please enter the path to the stocks.save file: ")
         try:
             with open(new_path, "r") as file:
-                stocks_data = file.read()
+                stocks_data = json.load(file)
+                # Remove spaces from keys
+                stocks_data = {key.strip(): value for key, value in stocks_data.items()}
                 stocks_file_path = new_path  # Update the save file path
-                return json.loads("{" + stocks_data.split("{", 1)[1])
+                return stocks_data
         except FileNotFoundError:
             print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
             return None
@@ -288,13 +292,16 @@ def main():
         elif choice == "9": # edit stocks
             stocks_data = load_stocks_file()
             print(Fore.GREEN + f"File {stocks_file_path} loaded." + Style.RESET_ALL)
-            print(f"Last modified: {datetime.datetime.fromtimestamp(os.path.getmtime(stocks_file_path)).strftime('%Y-%m-%d %H:%M:%S')}")
-            print(f"Last accessed: {datetime.datetime.fromtimestamp(os.path.getatime(stocks_file_path)).strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"Last modified: {datetime.datetime.fromtimestamp(os.path.getmtime(stocks_file_path)).strftime('%Y-%m-%d %I:%M:%S %p')}")
+            print(f"Last accessed: {datetime.datetime.fromtimestamp(os.path.getatime(stocks_file_path)).strftime('%Y-%m-%d %I:%M:%S %p')}")
             # print(f"Data: {stocks_data}")
             # Print the stock tickers
-            tickers = [ticker for ticker in stocks_data.keys() if ticker not in ['fish_found', 'org_found']]
+            tickers = [ticker.strip() for ticker in stocks_data.keys() if ticker not in ['fish_found', 'org_found']]
             tickers_str = ", ".join(tickers)
             print(f"Tickers: {tickers_str}")
+            # Print the stocks owned
+            owned_stocks_str = ", ".join([f"{ticker.strip()} ({Fore.GREEN}{stocks_data[ticker]['owned']}{Style.RESET_ALL})" for ticker in stocks_data if isinstance(stocks_data[ticker], dict) and 'owned' in stocks_data[ticker] and stocks_data[ticker]['owned'] > 0])
+            print(f"Bought stocks: {owned_stocks_str}")
             stocks_data = load_stocks_file()
             if stocks_data is None:
                 return
@@ -305,7 +312,7 @@ def main():
                 print("3. Go back to main menu")
                 choice = input("Enter your choice: ")
                 if choice == "1":
-                    stock_name = input("Enter the stock name (Ticker): ")
+                    stock_name = input("Enter the stock name (Ticker): ").strip()  # remove leading and trailing spaces
                     if stock_name in stocks_data:
                         owned_stocks = input("Enter the number of owned stocks: ")
                         stocks_data[stock_name]['owned'] = int(owned_stocks)
@@ -314,7 +321,7 @@ def main():
                     else:
                         print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
                 elif choice == "2":
-                    stock_name = input("Enter the stock name (Ticker): ")
+                    stock_name = input("Enter the stock name (Ticker): ").strip()  # remove leading and trailing spaces
                     if stock_name in stocks_data:
                         stocks_data[stock_name]['owned'] = 0
                         save_stocks_file(stocks_data)

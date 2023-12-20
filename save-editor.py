@@ -82,11 +82,15 @@ def print_status(save_data):
     
     life_death_symbol = "LIFE" if not save_data.get("death") else "DEATH"
     symbol_color = Fore.GREEN if life_death_symbol == "LIFE" else Fore.RED
+    stocks_data = load_stocks_file()
 
     print("Cruelty Squad Save Editor created by Aholicknight")
     print("Current Levels Unlocked:", Fore.RED + str(levels_unlocked) + Style.RESET_ALL)
     print("Number of Weapons Unlocked:", Fore.RED + str(weapons_unlocked) + Style.RESET_ALL)
     print("Current Money:", Fore.GREEN + str(money) + Style.RESET_ALL)
+    if stocks_data is not None:
+            owned_stocks_str = ", ".join([f"{ticker.strip()} ({Fore.GREEN}{stocks_data[ticker]['owned']}{Style.RESET_ALL})" for ticker in stocks_data if isinstance(stocks_data[ticker], dict) and 'owned' in stocks_data[ticker] and stocks_data[ticker]['owned'] > 0])
+            print(f"Current Stocks Owned: {owned_stocks_str}")
     print("Current Implants Unlocked:", Fore.RED + str(len(implants_unlocked)) + Style.RESET_ALL)
     print("Current Difficulty:", Fore.RED + str(current_difficulty) + Style.RESET_ALL)
     print("Current Life/Death Symbol:", symbol_color + str(life_death_symbol) + Style.RESET_ALL)

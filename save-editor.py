@@ -154,7 +154,7 @@ def main():
             print_status(save_data)
         
         elif choice == "3": # edit money
-            new_money = int(input("Enter new money amount: "))
+            new_money = float(input("Enter new money amount: "))
             save_data["money"] = new_money
             save_save_file(save_data)
             print("Money updated.")

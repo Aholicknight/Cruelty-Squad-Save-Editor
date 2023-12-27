@@ -5,10 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Save Editor",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}/save-editor.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Stocks Editor",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/stocks-save-editor",
             "console": "integratedTerminal",
             "justMyCode": true
         }

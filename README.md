@@ -11,6 +11,7 @@ This Python program edits the Cruelty Squad save file located in `%APPDATA%\Godo
 * Edit difficulty (Divine Light, Flesh Automation, Power In Misery, Hope Eradicated)
 * Change LIFE/DEATH Symbol
 * Load/Backup your save file
+* Edit stocks
 
 ## Download
 

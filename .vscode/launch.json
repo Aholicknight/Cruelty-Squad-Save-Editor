@@ -16,7 +16,7 @@
             "name": "Stocks Editor",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/stocks-save-editor",
+            "program": "${workspaceFolder}/stocks-save-editor.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }

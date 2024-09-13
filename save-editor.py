@@ -171,7 +171,7 @@ def main():
             print("2) Flesh Automation " + Fore.YELLOW + "(second easiest difficulty)" + Style.RESET_ALL)
             print("3) Power In Misery " + Fore.GREEN + "(easiest difficulty)" + Style.RESET_ALL)
             print("4) Hope Eradicated " + Fore.RED + "(secret hardest difficulty)" + Style.RESET_ALL)
-            print("5) Go back to main menu")
+            print("5) Go back to the main menu")
 
             difficulty_choice = input("Enter your choice: ")
 
@@ -194,7 +194,7 @@ def main():
             print("\nLife/Death Symbols:")
             print("1) LIFE " + Fore.GREEN + "(default)" + Style.RESET_ALL)
             print("2) DEATH " + Fore.RED + "(secret)" + Style.RESET_ALL)
-            print("3) Go back to main menu")
+            print("3) Go back to the main menu")
 
             symbol_choice = input("Enter your choice: ")
 
@@ -219,7 +219,7 @@ def main():
             print("\nSave File Operations:")
             print(Fore.GREEN + "1) Backup current save file" + Style.RESET_ALL)
             print(Fore.RED + "2) Load from backup" + Style.RESET_ALL)
-            print("3) Go back to main menu")
+            print("3) Go back to the main menu")
 
             operation_choice = input("Enter your choice: ")
 
@@ -313,7 +313,7 @@ def main():
                 print("What do you want to do?")
                 print("1. Edit stock")
                 print("2. Remove stocks")
-                print("3. Go back to main menu")
+                print("3. Go back to the main menu")
                 choice = input("Enter your choice: ")
                 if choice == "1":
                     stock_name = input("Enter the stock name (Ticker): ").strip()  # remove leading and trailing spaces
@@ -323,7 +323,7 @@ def main():
                         save_stocks_file(stocks_data)
                         print(Fore.GREEN + f"Stock {stock_name} updated." + Style.RESET_ALL)
                     else:
-                        print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
+                        print(Fore.RED + f"Stock {stock_name} was not found." + Style.RESET_ALL)
                 elif choice == "2":
                     stock_name = input("Enter the stock name (Ticker): ").strip()  # remove leading and trailing spaces
                     if stock_name in stocks_data:
@@ -331,11 +331,11 @@ def main():
                         save_stocks_file(stocks_data)
                         print(Fore.GREEN + f"Stock {stock_name} removed." + Style.RESET_ALL)
                     else:
-                        print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
+                        print(Fore.RED + f"Stock {stock_name} was not found." + Style.RESET_ALL)
                 elif choice == "3":
                     clear_console()
                     print_status(save_data)
-                    break # go back to main menu
+                    break # Go back to the main menu
                 else:
                     print(Fore.RED + "Invalid choice." + Style.RESET_ALL)
                 time.sleep(1)

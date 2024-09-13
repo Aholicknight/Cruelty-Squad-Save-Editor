@@ -1,4 +1,4 @@
-name: Build and Release
+name: Build and Release (test)
 
 on: 
   workflow_dispatch:
@@ -58,5 +58,6 @@ jobs:
         tag_name: ${{ github.event.inputs.tag }}
         name: Cruelty Squad Save Editor v${{ github.event.inputs.tag }}
         body: ${{ github.event.inputs.description }}
+        prerelease: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

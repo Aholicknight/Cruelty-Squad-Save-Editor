@@ -17,7 +17,7 @@ def load_save_file():
             save_data = file.read()
             return json.loads("{" + save_data.split("{", 1)[1])
     except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
-        print(Fore.RED + f"File {save_file_path} not found." + Style.RESET_ALL)
+        print(Fore.RED + f"File {save_file_path} was not found." + Style.RESET_ALL)
         new_path = input("Please enter the path to the savegame.save file: ")
         try:
             with open(new_path, "r") as file:
@@ -25,7 +25,7 @@ def load_save_file():
                 save_file_path = new_path  # Update the save file path
                 return json.loads("{" + save_data.split("{", 1)[1])
         except FileNotFoundError:
-            print(Fore.RED + f"File {save_file_path} not found." + Style.RESET_ALL)
+            print(Fore.RED + f"File {save_file_path} was not found." + Style.RESET_ALL)
             return None
 
 def load_stocks_file():

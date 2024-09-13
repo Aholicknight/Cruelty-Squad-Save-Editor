@@ -37,7 +37,7 @@ def load_stocks_file():
             stocks_data = {key.strip(): value for key, value in stocks_data.items()}
             return stocks_data
     except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
-        print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
+        print(Fore.RED + f"File {stocks_file_path} was not found." + Style.RESET_ALL)
         new_path = input("Please enter the path to the stocks.save file: ")
         try:
             with open(new_path, "r") as file:
@@ -47,7 +47,7 @@ def load_stocks_file():
                 stocks_file_path = new_path  # Update the save file path
                 return stocks_data
         except FileNotFoundError:
-            print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
+            print(Fore.RED + f"File {stocks_file_path} was not found." + Style.RESET_ALL)
             return None
 
 def save_save_file(data):

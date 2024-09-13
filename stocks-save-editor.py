@@ -16,7 +16,7 @@ def load_stocks_file():
             stocks_data = file.read()
             return json.loads("{" + stocks_data.split("{", 1)[1])
     except FileNotFoundError: # If the save file is not found, ask the user to enter the path to the save file
-        print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
+        print(Fore.RED + f"File {stocks_file_path} was not found." + Style.RESET_ALL)
         new_path = input("Please enter the path to the stocks.save file: ")
         try:
             with open(new_path, "r") as file:
@@ -24,7 +24,7 @@ def load_stocks_file():
                 stocks_file_path = new_path  # Update the save file path
                 return json.loads("{" + stocks_data.split("{", 1)[1])
         except FileNotFoundError:
-            print(Fore.RED + f"File {stocks_file_path} not found." + Style.RESET_ALL)
+            print(Fore.RED + f"File {stocks_file_path} was not found." + Style.RESET_ALL)
             return None
 
 def save_stocks_file(data):
@@ -65,7 +65,7 @@ def main():
                 save_stocks_file(stocks_data)
                 print(Fore.GREEN + f"Stock {stock_name} updated." + Style.RESET_ALL)
             else:
-                print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
+                print(Fore.RED + f"Stock {stock_name} was not found." + Style.RESET_ALL)
         elif choice == "2":
             stock_name = input("Enter the stock name (Ticker): ")
             if stock_name in stocks_data:
@@ -73,7 +73,7 @@ def main():
                 save_stocks_file(stocks_data)
                 print(Fore.GREEN + f"Stock {stock_name} removed." + Style.RESET_ALL)
             else:
-                print(Fore.RED + f"Stock {stock_name} not found." + Style.RESET_ALL)
+                print(Fore.RED + f"Stock {stock_name} was not found." + Style.RESET_ALL)
         elif choice == "3":
             break
         else:

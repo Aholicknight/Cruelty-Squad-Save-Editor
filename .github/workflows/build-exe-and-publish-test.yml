@@ -51,7 +51,7 @@ jobs:
     - name: Build exe
       run: pyinstaller --onefile --icon=favicon.ico --name="Cruelty Squad Save Editor" --version-file=version_info.txt save-editor.py
 
-    - name: Test
+    - name: Pre-release
       uses: softprops/action-gh-release@v1
       with:
         files: ./dist/Cruelty Squad Save Editor.exe

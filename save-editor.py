@@ -67,10 +67,10 @@ def print_status(save_data):
     implants_unlocked = save_data["implants_unlocked"]
 
     difficulty_mapping = {
-        "soul": "Divine Light",
-        "hell_discovered": "Flesh Automation",
-        "husk": "Power In Misery",
-        "hope": "Hope Eradicated"
+        "soul": "Divine Light", # Default difficulty
+        "hell_discovered": "Flesh Automation", # Second easiest difficulty
+        "husk": "Power In Misery", # Easiest difficulty
+        "hope": "Hope Eradicated" # Secret hardest difficulty
     }
 
     current_difficulty = "Unknown"  # If no difficulty is found, set it to unknown (should never happen)
@@ -109,10 +109,10 @@ def main():
     money = save_data["money"]
 
     difficulty_mapping = {
-        "soul": "Divine Light",
-        "hell_discovered": "Flesh Automation",
-        "husk": "Power In Misery",
-        "hope": "Hope Eradicated"
+        "soul": "Divine Light", # Default difficulty
+        "hell_discovered": "Flesh Automation", # Second easiest difficulty
+        "husk": "Power In Misery", # Easiest difficulty
+        "hope": "Hope Eradicated" # Secret hardest difficulty
     }
 
     for key, value in difficulty_mapping.items():
